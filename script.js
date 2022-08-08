@@ -1,6 +1,7 @@
 //getting all required elements
 const inputBox = document.querySelector(".inputField input");
 const addBtn = document.querySelector(".inputField button");
+const todoList = document.querySelector(".todoList");
 
 inputBox.onkeyup = ()=>{
     let userData = inputBox.value; //getting user entered value
@@ -12,15 +13,29 @@ inputBox.onkeyup = ()=>{
 }
 
 //if user on the add button
-addBtn.onclick = ()=>{
+addBtn.onclick =()=>{
     let userData = inputBox.value; //getting user entered value
     let getLocalStorage = localStorage.getItem("New Todo"); //getting localstorage
     if(getLocalStorage == null){ //if localstorage is null
-        listArr = []; //creating blank array
+        listArray = []; //creating blank array
     }else{
-        listArr = JSON.parse(getLocalStorage); //transforming json string into a js object
+        listArray = JSON.parse(getLocalStorage); //transforming json string into a js object
     }
-    listArr.push(userData); //pushing or adding user data
-    localStorage.setItem("New Todo", JSON.stringify(listArr)); //transforming js object into a json string
+    listArray.push(userData); //pushing or adding user data
+    localStorage.setItem("New Todo", JSON.stringify(listArray)); //transforming js object into a json string
+    showTasks(); //calling showTasks function
+}
 
+function showTasks(){
+    let getLocalStorage = localStorage.getItem("New Todo"); //getting localstorage
+    if(getLocalStorage == null){ //if localstorage is null
+        listArray = []; //creating blank array
+    }else{
+        listArray = JSON.parse(getLocalStorage); //transforming json string into a js object
+    }
+    let newLiTag = '';
+    listArray.forEach((element, index) => {
+        newLiTag = `<li> ${element} <span><i class="fas fa-trash"></i></span></li>`;  
+    });  
+    todoList.innerHTML = newLiTag; //adding new li tag inside ul tag 
 }
