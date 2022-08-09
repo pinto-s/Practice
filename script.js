@@ -36,6 +36,8 @@ function showTasks(){
     }else{
         listArray = JSON.parse(getLocalStorage); //transforming json string into a js object
     }
+    const pendingNumb = document.querySelector(".pendingNumb");
+    pendingNumb.textContent = listArray.length; //passing the length value in pendingNumb
     let newLiTag = '';
     listArray.forEach((element, index) => {
         newLiTag += `<li> ${element} <span onclick="deleteTask(${index})"; ><i class="fas fa-trash"></i></span></li>`;  
