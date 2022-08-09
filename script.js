@@ -12,6 +12,8 @@ inputBox.onkeyup = ()=>{
     }
 }
 
+showTasks(); //calling showTasks function
+
 //if user on the add button
 addBtn.onclick =()=>{
     let userData = inputBox.value; //getting user entered value
