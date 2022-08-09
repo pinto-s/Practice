@@ -27,6 +27,7 @@ addBtn.onclick =()=>{
     listArray.push(userData); //pushing or adding user data
     localStorage.setItem("New Todo", JSON.stringify(listArray)); //transforming js object into a json string
     showTasks(); //calling showTasks function
+    addBtn.classList.remove("active"); //deactivate the add button
 }
 
 //function to add task list inside ul
@@ -39,6 +40,12 @@ function showTasks(){
     }
     const pendingNumb = document.querySelector(".pendingNumb");
     pendingNumb.textContent = listArray.length; //passing the length value in pendingNumb
+    if(listArray.length > 0){ //if array length is greater than 0
+        deleteAllBtn.classList.add("active"); //activate the clearall button
+    }else{
+        deleteAllBtn.classList.remove("active"); //unactivate the clearall button
+
+    }
     let newLiTag = '';
     listArray.forEach((element, index) => {
         newLiTag += `<li> ${element} <span onclick="deleteTask(${index})"; ><i class="fas fa-trash"></i></span></li>`;  
