@@ -28,6 +28,7 @@ addBtn.onclick =()=>{
     showTasks(); //calling showTasks function
 }
 
+//function to add task list inside ul
 function showTasks(){
     let getLocalStorage = localStorage.getItem("New Todo"); //getting localstorage
     if(getLocalStorage == null){ //if localstorage is null
@@ -37,7 +38,18 @@ function showTasks(){
     }
     let newLiTag = '';
     listArray.forEach((element, index) => {
-        newLiTag += `<li> ${element} <span><i class="fas fa-trash"></i></span></li>`;  
+        newLiTag += `<li> ${element} <span onclick="deleteTask(${index})"; ><i class="fas fa-trash"></i></span></li>`;  
     });  
     todoList.innerHTML = newLiTag; //adding new li tag inside ul tag 
+    inputBox.value = ""; //once task is added leave the input field blank
+}
+
+//delete task function
+function deleteTask(index){
+    let getLocalStorage = localStorage.getItem("New Todo");
+    listArray = JSON.parse(getLocalStorage);
+    listArray.splice(index, 1); //delete or remove the particular indexed li
+    //after removing the li tag, again update the local storage
+    localStorage.setItem("New Todo", JSON.stringify(listArray)); //transforming js object into a json string
+    showTasks(); //calling showTasks function
 }
