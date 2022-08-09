@@ -2,6 +2,7 @@
 const inputBox = document.querySelector(".inputField input");
 const addBtn = document.querySelector(".inputField button");
 const todoList = document.querySelector(".todoList");
+const deleteAllBtn = document.querySelector(".footer button");
 
 inputBox.onkeyup = ()=>{
     let userData = inputBox.value; //getting user entered value
@@ -52,6 +53,14 @@ function deleteTask(index){
     listArray = JSON.parse(getLocalStorage);
     listArray.splice(index, 1); //delete or remove the particular indexed li
     //after removing the li tag, again update the local storage
+    localStorage.setItem("New Todo", JSON.stringify(listArray)); //transforming js object into a json string
+    showTasks(); //calling showTasks function
+}
+
+//delete all tasks function
+deleteAllBtn.onclick = ()=>{
+    listArray = []; //empty an array
+    //after delete all task again update the local storage
     localStorage.setItem("New Todo", JSON.stringify(listArray)); //transforming js object into a json string
     showTasks(); //calling showTasks function
 }
